@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jezel Mitz Ysulat - Clear Thinking. Calm Execution. Real Results.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --champagne: #F2E5C6;
+            --sand-gold: #F2D9A0;
+            --burgundy: #75162D;
+            --dark-maroon: #560B18;
+            --deep-wine: #3B010B;
+            --text-light: #F2E5C6;
+            --text-dark: #3B010B;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--champagne);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-wine);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-size: 2rem;
+            color: var(--champagne);
+            font-style: italic;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(242, 229, 198, 0.95);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--burgundy);
+        }
+
+        nav a {
+            margin-left: 2.5rem;
+            text-decoration: none;
+            color: var(--burgundy);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            font-family: 'Arial', sans-serif;
+        }
+
+        nav a:hover {
+            color: var(--dark-maroon);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--sand-gold) 100%);
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            color: var(--burgundy);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-maroon);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-maroon);
+            margin-top: 2rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        section {
+            padding: 8rem 10%;
+            position: relative;
+        }
+
+        .section-dark {
+            background-color: var(--burgundy);
+            color: var(--text-light);
+        }
+
+        .section-wine {
+            background-color: var(--deep-wine);
+            color: var(--text-light);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-style: italic;
+            color: var(--sand-gold);
+            text-align: center;
+        }
+
+        .section-light .section-title {
+            color: var(--burgundy);
+        }
+
+        .content-block {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex-shrink: 0;
+        }
+
+        .about-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--burgundy);
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .content-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--sand-gold);
+        }
+
+        .section-light .content-block h3 {
+            color: var(--burgundy);
+        }
+
+        .content-block p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .process-step {
+            margin-bottom: 2.5rem;
+            padding-left: 2rem;
+            border-left: 2px solid var(--sand-gold);
+        }
+
+        .section-light .process-step {
+            border-left-color: var(--burgundy);
+        }
+
+        .process-step h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--champagne);
+        }
+
+        .section-light .process-step h4 {
+            color: var(--dark-maroon);
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(242, 229, 198, 0.1);
+            border-radius: 8px;
+            border: 2px solid var(--sand-gold);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--burgundy);
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        ul li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: -1.5rem;
+            color: var(--sand-gold);
+        }
+
+        .section-light ul li:before {
+            color: var(--burgundy);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tool-item {
+            padding: 1.5rem;
+            background: rgba(242, 229, 198, 0.1);
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            border: 2px solid var(--burgundy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .tool-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .value-item {
+            padding: 2rem;
+            background: rgba(242, 229, 198, 0.05);
+            border-radius: 8px;
+        }
+
+        .value-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--champagne);
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 8rem 10%;
+            background: linear-gradient(135deg, var(--dark-maroon) 0%, var(--deep-wine) 100%);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background-color: var(--sand-gold);
+            color: var(--deep-wine);
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: transform 0.3s, background-color 0.3s;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background-color: var(--champagne);
+        }
+
+        footer {
+            padding: 3rem 10%;
+            background-color: var(--deep-wine);
+            color: var(--champagne);
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 5rem 5%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-text">Jezel Mitz Ysulat</div>
+    </div>
+
+    <header>
+        <div class="logo">JMY</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#approach">Approach</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Clear Thinking.<br>Calm Execution.<br>Real Results.</h1>
+            <p>I help leaders, teams, and clients turn complex ideas into clear, actionable steps through structured support, thoughtful communication, and consistent follow-through.</p>
+            <p class="subtitle">I do my best work in fast-moving, people-driven environments where clarity, trust, and execution truly matter.</p>
+        </div>
+    </section>
+
+    <section id="about" class="section-light">
+        <h2 class="section-title">Hi, I'm Jez.</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <p>I'm a sales, operations, and client-facing professional with experience supporting leadership, managing client relationships, coordinating teams, and guiding people from interest to action.</p>
+                <p>I've worked across sales, marketing, administration, and executive leadership—which means I understand how decisions are made, where processes tend to break down, and how critical clear communication is at every stage.</p>
+                <p style="margin-top: 2rem; font-weight: bold;">What I bring isn't just skills. I bring assurance, structure, and clarity to the work happening behind the scenes.</p>
+            </div>
+            <div class="about-image">
+                <img src="YOUR_IMAGE_URL_HERE" alt="Jez">
+            </div>
+        </div>
+    </section>
+
+    <section id="approach" class="section-dark">
+        <h2 class="section-title">How I Work</h2>
+        <div class="content-block">
+            <p>I don't jump straight into tools or tasks. I start by creating clarity.</p>
+            <p>My approach is simple, intentional, and people-first:</p>
+        </div>
+        
+        <div class="content-block">
+            <div class="process-step fade-in">
+                <h4>Understand the real need</h4>
+                <p>I listen closely to clients, leaders, and teams to uncover what's actually needed—not just what's requested.</p>
+            </div>
+            
+            <div class="process-step fade-in">
+                <h4>Simplify complexity</h4>
+                <p>I translate ideas, goals, and requirements into clear, actionable steps using plain language and structure.</p>
+            </div>
+            
+            <div class="process-step fade-in">
+                <h4>Create alignment</h4>
+                <p>I document outcomes, prepare briefs or follow-ups, and make sure everyone knows what happens next.</p>
+            </div>
+            
+            <div class="process-step fade-in">
+                <h4>Execute and follow through</h4>
+                <p>I track progress, follow up consistently, and keep work moving forward without unnecessary friction.</p>
+            </div>
+            
+            <div class="process-step fade-in">
+                <h4>Refine and improve</h4>
+                <p>I review what's working, address gaps, and continuously improve processes over time.</p>
+            </div>
+        </div>
+        
+        <div class="content-block">
+            <p style="text-align: center; font-style: italic; font-size: 1.2rem; margin-top: 3rem;">This approach protects time, reduces confusion, and builds trust.</p>
+        </div>
+    </section>
+
+    <section class="section-light">
+        <h2 class="section-title">How I Add Value in My First 30 Days</h2>
+        
+        <div class="content-block">
+            <div class="timeline-item fade-in">
+                <h4>Days 1–7: Learn and Align</h4>
+                <p>I focus on understanding the business, people, tools, and workflows—building context before making changes.</p>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <h4>Days 8–14: Organize and Support</h4>
+                <p>I help stabilize communication, improve follow-ups, and support daily operations so work flows more smoothly.</p>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <h4>Days 15–21: Improve and Simplify</h4>
+                <p>I identify small, meaningful process improvements that save time, reduce friction, and improve clarity.</p>
+            </div>
+            
+            <div class="timeline-item fade-in">
+                <h4>Days 22–30: Own and Optimize</h4>
+                <p>I take ownership of responsibilities, operate independently, and contribute proactively to better outcomes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section-wine">
+        <h2 class="section-title">What I've Done</h2>
+        
+        <div class="content-block">
+            <div class="process-step fade-in">
+                <h3>Sales & Marketing Support</h3>
+                <ul>
+                    <li>Re-engaged webinar and event participants through calls and email invitations</li>
+                    <li>Managed post-event lead follow-ups and sales conversations</li>
+                    <li>Assisted in closing offers and nurturing leads</li>
+                    <li>Prepared proposals, took sales call notes, and created clear project briefs</li>
+                </ul>
+            </div>
+            
+            <div class="process-step fade-in">
+                <h3>Partnerships & Training</h3>
+                <ul>
+                    <li>Built partnerships with non-profit organizations</li>
+                    <li>Coordinated and supported digital platform training</li>
+                    <li>Helped teams and partners adopt systems such as GoHighLevel</li>
+                </ul>
+            </div>
+            
+            <div class="process-step fade-in">
+                <h3>Executive & Leadership Experience</h3>
+                <ul>
+                    <li>Conducted discovery calls independently and alongside sales teams</li>
+                    <li>Ensured proposals, delivery, and timelines stayed aligned</li>
+                    <li>Addressed client concerns, evolving needs, and additional service requests</li>
+                    <li>Balanced sales, operations, and long-term relationship management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light">
+        <h2 class="section-title">Tools I Use</h2>
+        <div class="content-block">
+            <p style="text-align: center; font-style: italic; margin-bottom: 3rem;">Tools support my work—they don't replace thinking.</p>
+        </div>
+        
+        <div class="tools-grid">
+            <div class="tool-item fade-in">
+                <img src="https://cdn.cdnlogo.com/logos/g/38/google-workspace.svg" alt="Google Workspace" class="tool-logo">
+                <div>Google Workspace<br>(Gmail, Docs, Sheets, Calendar)</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://cdn.cdnlogo.com/logos/g/23/gohighlevel.svg" alt="GoHighLevel" class="tool-logo">
+                <div>CRM platforms<br>(GoHighLevel exposure)</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://cdn.cdnlogo.com/logos/c/25/canva.svg" alt="Canva" class="tool-logo">
+                <div>Canva<br>(presentations, marketing graphics, content)</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://cdn.cdnlogo.com/logos/c/20/chatgpt.svg" alt="AI Tools" class="tool-logo">
+                <div>AI tools<br>(ChatGPT, Gemini, Perplexity)</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://cdn.cdnlogo.com/logos/g/69/github-icon.svg" alt="GitHub" class="tool-logo">
+                <div>GitHub</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://cdn.cdnlogo.com/logos/m/17/microsoft-teams.svg" alt="Microsoft Teams" class="tool-logo">
+                <div>Microsoft Teams</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://asset.brandfetch.io/idanJIVSRH/idOSANxUfc.svg" alt="Claude" class="tool-logo">
+                <div>Claude AI</div>
+            </div>
+            <div class="tool-item fade-in">
+                <img src="https://asset.brandfetch.io/idGbIJ69Vn/idaChWGC-y.svg" alt="PandaDoc" class="tool-logo">
+                <div>PandaDoc</div>
+            </div>
+        </div>
+        
+        <div class="content-block" style="margin-top: 2rem;">
+            <p style="font-size: 0.95rem; font-style: italic;">AI tools used for cross-checking, idea refinement, and efficiency—not automation without judgment</p>
+        </div>
+    </section>
+
+    <section class="section-dark">
+        <h2 class="section-title">What I Care About at Work</h2>
+        <div class="content-block">
+            <p style="text-align: center; margin-bottom: 3rem;">I thrive in environments where:</p>
+        </div>
+        
+        <div class="values-grid">
+            <div class="value-item fade-in">
+                <h4>People are treated with respect</h4>
+            </div>
+            <div class="value-item fade-in">
+                <h4>Communication is clear and honest</h4>
+            </div>
+            <div class="value-item fade-in">
+                <h4>Excellence is expected, not forced</h4>
+            </div>
+            <div class="value-item fade-in">
+                <h4>Growth is encouraged through responsibility</h4>
+            </div>
+            <div class="value-item fade-in">
+                <h4>Complex problems are made simple for customers</h4>
+            </div>
+        </div>
+        
+        <div class="content-block" style="margin-top: 3rem;">
+            <p style="text-align: center; font-style: italic;">These values guide how I work, lead, and support others.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="cta-section">
+        <h2 class="section-title" style="color: var(--champagne);">Let's Work Together</h2>
+        <div class="content-block">
+            <p style="color: var(--champagne);">If you're looking for someone who:</p>
+            <ul style="text-align: left; max-width: 600px; margin: 2rem auto; color: var(--champagne);">
+                <li>Thinks clearly under pressure</li>
+                <li>Communicates with intention</li>
+                <li>Protects time and priorities</li>
+                <li>Follows through consistently</li>
+                <li>Cares about both people and outcomes</li>
+            </ul>
+            <p style="margin-top: 2rem; font-size: 1.2rem; color: var(--champagne);">I'd love to connect.</p>
+            <a href="mailto:jezelmitzysulat@gmail.com" class="cta-button">GET IN TOUCH</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Jezel Mitz Ysulat. All rights reserved.</p>
+        <p style="margin-top: 1rem;"><a href="mailto:jezelmitzysulat@gmail.com" style="color: var(--sand-gold); text-decoration: none;">jezelmitzysulat@gmail.com</a></p>
+    </footer>
+
+    <script>
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Fade in on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
